@@ -1,0 +1,41 @@
+CODE FOR GSM AND BUZZER ACTIVATION
+	
+#include<SoftwareSerial.h>
+SoftwareSerial gsm(3,2);
+const int buzzer = 9;   // buzzer to arduino pin 9
+
+void setup()
+{
+  delay(10000);
+  Serial.begin(9600);
+  gsm.begin(9600);
+  gsm.println("AT+CMGF=1");
+  delay(1000);
+  gsm.println("AT+CMGS=\"+91XXXXXXXXXX\"\r"); //replace x by your number
+  delay(1000);
+  gsm.println("THE IP ADDRESS ALONG WITH THE LOCATION IS: ");
+  delay(100);
+  gsm.println((char)26);
+  delay(1000);
+pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
+}
+
+void loop()
+{
+tone(buzzer, 1000); // Send 1KHz sound signal...
+  delay(1000);         // ...for 1 sec
+  noTone(buzzer);  //  Stop sound...
+  delay(1000);     //  ...for 1sec 
+}
+
+
+
+
+
+
+
+
+
+
+
+
